@@ -1,0 +1,16 @@
+package com.marondalgram.test;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class Testcontroller {
+	
+	@RequestMapping("test01")
+	@ResponseBody
+	public String test() {
+		return "hello world!";
+	}
+
+}
