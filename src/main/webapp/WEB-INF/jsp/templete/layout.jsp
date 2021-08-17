@@ -20,7 +20,7 @@
 <body>
 	<div class="container">
 		<jsp:include page="../include/header.jsp"/>
-		<section class="content d-flex justify-content-center">
+		<section class="content d-flex justify-content-center mt-2 mb-2">
 			<jsp:include page="../${marondal}.jsp"/>
 		</section>
 		<jsp:include page="../include/footer.jsp" />

@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <div class="col-6">
     
-    <div class="mb-2">
+    <img id="imageControl" alt="이미지" src="/static/images/ym1.jpg">
+    </div>
+
+    <div class="mb-2 col-6">
     <h1>로그인</h1>
     <form method="post" id="loginForm" action="/log/sign_in" >
     	<div class="input-gruop">
@@ -32,6 +36,20 @@
 
 
 	$(document).ready(function() {
+		
+		
+		 let bannerSrcArr = ['/static/images/ke.jpg', '/static/images/love.jpg',
+			 '/static/images/team.jpg', '/static/images/ym1.jpg'];
+                var currentIndex = 0;
+                setInterval(function() {
+                    $('#imageControl').attr('src', bannerSrcArr[currentIndex]);
+                    currentIndex++;
+
+                    if (currentIndex >= bannerSrcArr.length) {
+                        currentIndex = 0;
+                    }
+                }, 3000); 
+		
 
 		$('#loginForm').submit(function(e) {
 			e.preventDefault();
