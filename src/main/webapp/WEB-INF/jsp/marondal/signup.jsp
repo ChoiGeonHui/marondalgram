@@ -99,14 +99,30 @@
 				return;
 			}
 			
+			 if(password.length <4){
+				 alert('비밀번호는 4자 이상해주세요');
+				 return;
+			 }
+			
+			
+			let regExpEn = /[0-1]/;
+			let regExpEn2 = /[!@#$%?]/;
+			if(regExpEn.test(password)&&regExpEn2.test(password)){
+				alert('기호포함');
+			}else{
+				alert('비밀번호에 특수기호[!@#$%?]가 포함되어야 합니다');
+				return;
+			}
+			
+			
 			let name = $('#name').val().trim();
-			if(loginId ==''){
+			if(name ==''){
 				alert('이름을 입력하세요');
 				return;
 			}
 			
 			let email = $('#email').val().trim();
-			if(loginId ==''){
+			if(email ==''){
 				alert('이메일을 입력하세요');
 				return;
 			}
