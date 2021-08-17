@@ -107,10 +107,11 @@
 			
 			let regExpEn = /[0-1]/;
 			let regExpEn2 = /[!@#$%?]/;
-			if(regExpEn.test(password)&&regExpEn2.test(password)){
+			let regExpEn3 =/[A-Za-z]/;
+			if(regExpEn.test(password)&&regExpEn2.test(password)&&regExpEn3.test(password)){
 				alert('기호포함');
 			}else{
-				alert('비밀번호에 특수기호[!@#$%?]가 포함되어야 합니다');
+				alert('비밀번호에 문자, 특수기호[!@#$%?]가 포함되어야 합니다');
 				return;
 			}
 			
