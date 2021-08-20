@@ -7,10 +7,10 @@ import org.springframework.stereotype.Repository;
 public interface TimelineDAO {
 	
 	
-	public int insertcoment(
-			@Param("postId") int postId,
+	public int insertPost(
 			@Param("userId") int userId,
 			@Param("userName") String userName,
-			@Param("content")String content);
+			@Param("content") String content,
+			@Param("imagePath")String imagePath);
 
 }

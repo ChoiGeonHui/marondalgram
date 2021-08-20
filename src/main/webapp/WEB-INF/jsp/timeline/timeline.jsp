@@ -10,11 +10,15 @@
 
 			<div>
 
-				<textarea rows="5px" cols="50px" placeholder="내용을 입력해주세요">
-	
-			</textarea>
-				<br>
-				<button class="btn btn-info">업로드</button>
+				<textarea rows="5" cols="90" placeholder="내용을 입력해주세요"></textarea>
+				<div class="d-flex justify-content-between">
+				<input id="file" name="file" accept=".jpg,.jpeg,.png,.gif" type="file" class="d-none">
+				<a href="#"id="fileUploadBtn"><img width="35" src="/static/images/cm.jpg"></a>
+						<%-- 업로드 된 임시 파일 이름 저장될 곳 --%>
+						<div id="fileName" class="ml-2">
+						</div>
+				<button id="saveBtn" type="button" class="btn btn-info">업로드</button>
+				</div>
 			</div>
 
 		</div>
@@ -69,3 +73,73 @@
 
 	</div>
 </div>
+
+
+<script>
+$(document).ready(function(){
+	$('#fileUploadBtn').on('click',function(e){
+		e.preventDefault();
+		$('#file').click();
+	});
+	
+	
+	//사용자가 파일 업로드를 했을 때
+	$('#file').on('change',function(e){
+		let fileName =e.target.files[0].name;
+		
+		//확장자
+		let ext = fileName.split('.');
+		
+		if(ext.length<2 || 
+				(ext[ext.length -1] != 'gif'
+				&&ext[ext.length -1] != 'png'
+				&&ext[ext.length -1] != 'jpg'
+				&&ext[ext.length -1] != 'jpeg')){
+			alert('부적절한 파일입니다');
+			$(this).val("");
+			return;
+		}
+		
+		$('#fileName').text(fileName);
+	});
+	
+	$('#saveBtn').on('click',function(e){
+		let content = $('textarea').val();
+		
+		if(content.length <1){
+			alert('내용을 입력해주세요');
+			return;
+		}
+		
+		
+		
+		let formData = new FormData();
+		formData.append("content",content);
+		formData.append("file",$('input[name=file]')[0].files[0]);
+		
+		$.ajax({
+			method:'post',
+			url:'/post/create',
+			data:formData,
+			processData:false,
+			contentType:false,
+			success:function(data){
+				if(data.result=='success'){
+					alert("저장되었습니다.");
+					location.href="/timeline"
+				}
+			},
+			error:function(e){
+					alert("글작성에 실패했습니다. 로그인을 안했거나 파일 내부문제입니다.");
+			}
+		});
+		
+	});
+	
+	
+});
+
+
+</script>
+
+
