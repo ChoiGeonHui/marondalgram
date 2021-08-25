@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.marondalgram.post.model.Post;
+
+import com.marondalgram.timeline.bo.ContentBO;
 import com.marondalgram.timeline.bo.TimelineBO;
+import com.marondalgram.timeline.domain.Content;
 
 @Controller
 public class TimelineController {
@@ -19,18 +21,26 @@ public class TimelineController {
 	@Autowired
 	TimelineBO timelineBO;
 	
+	@Autowired
+	ContentBO contentBO;
+	
 	@RequestMapping("/timeline")
 	public String timeline(Model model,
 			HttpServletRequest request) {
 		
+		Integer userId = null;
+		String userName = null;
+		
 		HttpSession session = request.getSession();
-		int userId =(int) session.getAttribute("userId");
-		String userName = (String) session.getAttribute("userName");
-		List<Post> list = timelineBO.getListPostById(userId);
+		userId =(Integer) session.getAttribute("userId");
+		userName = (String) session.getAttribute("userName");
+		//List<Post> list = timelineBO.getListPostById(userId);
+		List<Content> list = contentBO.AllPostListView();
 		
 		
-		model.addAttribute("userName", userName);
-		model.addAttribute("postlist", list);	
+		model.addAttribute("userId", userId);
+		model.addAttribute("UserName", userName);
+		model.addAttribute("contentList", list);
 		model.addAttribute("marondal", "timeline/timeline");
 		return "/templete/layout";
 	}

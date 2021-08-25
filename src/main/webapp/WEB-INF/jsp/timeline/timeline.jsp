@@ -23,27 +23,29 @@
 
 		</div>
 
-<c:forEach var="post" items="${postlist}">
+<c:forEach var="content" items="${contentList}">
 		<div class="bg-secondary mt-2 d-flex justify-content-between">
-			<b>${userName}</b>
+			<b>${content.post.userName}</b>
 			<a href="#" class="moreBtn">
 			<img height="25px" alt="더보기" src="/static/images/moreicon.jpg">
 			</a>
 		</div>
 		<div class="mt-2 col-12">
-		<c:if test="${not empty  post.imagePath}">
+		<c:if test="${not empty  content.post.imagePath}">
 			<img class="col-12" alt="사진"
-				src="${post.imagePath}">
+				src="${content.post.imagePath}">
 		</c:if>	
 		</div>
 		<div class="mt-2">
-			<img height="20px" alt="좋아요" src="/static/images/heart.jpg"><b>좋아요 <%-- ${like.count }--%> 30개
-			</b>
+		<a href="#" class="btnlike">
+			<img height="20px" alt="좋아요" src="/static/images/heart.jpg">
+		</a>
+			<b>좋아요 ${content.likeCount } 개</b>
 		</div>
 
 		<div class=" mt-2" id="title">
-			<b>${userName}</b> 
-			<span class="col-12">${post.content}</span>
+			<b>${content.post.userName}</b> 
+			<span class="col-12">${content.post.content}</span>
 		</div>
 
 		<div>
@@ -52,29 +54,39 @@
 			</div>
 			<table>
 
-				<%-- <c:forEach var="coment" items="${coment}"> --%>
 
+				<c:forEach var="comment" items="${content.commentlist}"> 
 				<tr>
-					<th>아이디1 <!-- ${coment.userId} -->
+					<th>${comment.userName}
 					</th>
-					<td>너무 이뻐요 <!-- ${coment.content} -->
+					<td>${comment.content}
 					</td>
-					<td><img height="15px" alt="닫기" src="/static/images/xi.jpg"> </td>
-				</tr>
+					
+							<c:if test="${userId eq comment.userId }">
+								<td>
+									<a href="#" class="btndeleteLike"> 
+										<img height="15px" alt="닫기" src="/static/images/xi.jpg">
+									</a>
+								</td>
+							</c:if>
+						</tr>
 
-				<%-- </c:forEach> --%>
+				</c:forEach>
 			</table>
-			<hr>
+				 <c:if test="${not empty userId}"> 
+					<div class="mt-2 mb-2 input-group col-12">
+						<div class="input-group-prepend">
+							<input type="text" id="commentText${content.post.id}" class="form-control" placeholder="댓글을 작성하세요">
+							<button class="text-info btn btn-white commentBtn" data-post-id="${content.post.id }">게시</button>
+						</div>
+					</div>
+				</c:if>
+				<hr>
 
 		</div>
 </c:forEach>
+			
 
-		<div class="mt-2 mb-2 input-group col-12">
-			<div class="input-group-prepend">
-				<input type="text" class="form-control">
-				<button class="text-info btn btn-white">게시</button>
-			</div>
-		</div>
 
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MMM">
   Launch demo modal
@@ -169,6 +181,53 @@ $(document).ready(function(){
 		});
 		
 	});
+	
+	
+	
+	//댓글 작성
+	$(".commentBtn").on('click',function(e){
+		e.preventDefault();
+		
+		
+		let postId = $(this).data('post-id');
+		let commetText = $('#commentText' + postId).val();
+		
+		if(commetText ==null){
+			alert("댓글을 작성하세요");
+			return;		
+		}
+		
+		$.ajax({
+			method:'post',
+			url:'/comment/create',
+			data:{'postId':postId,'content':commetText},
+			success:function(data){
+				if(data.result=="success"){
+				alert("작성 완료");
+				location.reload(); // 새로고침
+					
+				}else{
+				alert("오류발생");				
+				}
+				
+				
+			},
+			error:function(){
+				alert("에러발생");
+			}
+			
+			
+		});
+		
+		
+		
+		
+		
+	})
+	
+	
+	
+	
 	
 	
 });

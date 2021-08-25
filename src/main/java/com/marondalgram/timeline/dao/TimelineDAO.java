@@ -18,6 +18,6 @@ public interface TimelineDAO {
 			@Param("imagePath")String imagePath);
 	
 	
-	public List<Post> selectListPostById(@Param("userId") int userId);
+	public List<Post> selectListPostById();
 
 }

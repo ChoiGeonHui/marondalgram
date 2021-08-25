@@ -25,8 +25,8 @@ public class TimelineBO {
 	
 	
 	
-	public List<Post> getListPostById(int userId){
-		return timelineDAO.selectListPostById(userId);
+	public List<Post> getListPostById(){
+		return timelineDAO.selectListPostById();
 	}
 	
 	

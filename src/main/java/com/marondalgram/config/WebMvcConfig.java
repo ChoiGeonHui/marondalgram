@@ -20,10 +20,18 @@ public class WebMvcConfig implements WebMvcConfigurer{
 		.excludePathPatterns("/user/sign_out","/static/**","/error");
 	}
 	
+	/*
+	 * @Override public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	 * registry.addResourceHandler("/images/**")
+	 * .addResourceLocations("file:///"+FileManagerSurvice.FILE_UPLOAD_PATH); }
+	 */
+	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/images/**")
+		registry.addResourceHandler("/images/**") //http://localhost/images/.. 와 같이 접근 가능하게 맵핑한다.
 		.addResourceLocations("file:///"+FileManagerSurvice.FILE_UPLOAD_PATH);
+		//실제 파일 저장위치
 	}
+
 
 }
