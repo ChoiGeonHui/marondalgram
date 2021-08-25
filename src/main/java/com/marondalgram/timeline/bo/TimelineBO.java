@@ -1,5 +1,7 @@
 package com.marondalgram.timeline.bo;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.marondalgram.commen.FileManagerSurvice;
+import com.marondalgram.post.model.Post;
 import com.marondalgram.timeline.dao.TimelineDAO;
 
 @Service
@@ -19,6 +22,13 @@ public class TimelineBO {
 	
 	@Autowired
 	FileManagerSurvice fileManagerSurvice;
+	
+	
+	
+	public List<Post> getListPostById(int userId){
+		return timelineDAO.selectListPostById(userId);
+	}
+	
 	
 	public void createPost(int userId, String userName,
 			String content, MultipartFile file) {

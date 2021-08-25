@@ -23,14 +23,18 @@
 
 		</div>
 
-
+<c:forEach var="post" items="${postlist}">
 		<div class="bg-secondary mt-2 d-flex justify-content-between">
-			<b> <%-- ${userName} --%>marobiana</b>
-			<a href="#"><img height="25px" alt="사진" src="/static/images/moreicon.jpg"></a>
+			<b>${userName}</b>
+			<a href="#" class="moreBtn">
+			<img height="25px" alt="더보기" src="/static/images/moreicon.jpg">
+			</a>
 		</div>
 		<div class="mt-2 col-12">
+		<c:if test="${not empty  post.imagePath}">
 			<img class="col-12" alt="사진"
-				src="/static/images/milky.jpg">
+				src="${post.imagePath}">
+		</c:if>	
 		</div>
 		<div class="mt-2">
 			<img height="20px" alt="좋아요" src="/static/images/heart.jpg"><b>좋아요 <%-- ${like.count }--%> 30개
@@ -38,12 +42,12 @@
 		</div>
 
 		<div class=" mt-2" id="title">
-			<b> <%-- ${userName} --%>marobiana</b> 
-			<span class="col-12"> <!--${post.content}  --> 밤하늘을 촬영했습니다~아름다워요~~~~~~</span>
+			<b>${userName}</b> 
+			<span class="col-12">${post.content}</span>
 		</div>
 
 		<div>
-			<div class="bg-secondary mt-2">
+			<div class="bg-info mt-2">
 				<b> 댓글 </b>
 			</div>
 			<table>
@@ -60,19 +64,49 @@
 
 				<%-- </c:forEach> --%>
 			</table>
+			<hr>
 
 		</div>
-		
+</c:forEach>
+
 		<div class="mt-2 mb-2 input-group col-12">
-		<div class="input-group-prepend">
-		<input type="text" class="form-control">
-		<button class="text-info btn btn-white">게시</button>
+			<div class="input-group-prepend">
+				<input type="text" class="form-control">
+				<button class="text-info btn btn-white">게시</button>
+			</div>
 		</div>
-		</div>
+
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MMM">
+  Launch demo modal
+</button>
+
 
 
 	</div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="MMM" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+		
+
 
 
 <script>
