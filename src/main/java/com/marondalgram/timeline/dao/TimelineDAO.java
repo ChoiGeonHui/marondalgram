@@ -18,6 +18,13 @@ public interface TimelineDAO {
 			@Param("imagePath")String imagePath);
 	
 	
+	public int deletePost(int postId);
+	
+	
+	
+	
 	public List<Post> selectListPostById();
+	
+	
 
 }

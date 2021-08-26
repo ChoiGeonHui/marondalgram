@@ -3,14 +3,14 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.marondalgram.like.dao.LikeDAO">
  
- <select id="selectLikeByPostId" parameterType="int" resultType="com.marondalgram.like.model.Like">
+ <select id="fillLikeByPostIdAndUserId" parameterType="int" resultType="int">
 	select
-	userId,
-	postId,
-	createdAt
+	count(1)
 	from
 	`like`
 	where
+	userId = #{userId}
+	and
 	postId = #{postId}
  
  </select>
@@ -27,6 +27,64 @@
  
  </select>
  
+  <select id="checklikeByUserId" parameterType="int" resultType="com.marondalgram.like.model.Like">
+
+	select
+	userId,
+	postId,
+	createdAt
+	from
+	`like`
+	where
+	userId = #{userId}
+ 
+ 
+ </select>
+ 
+ 
+ 
+ 
+ 
+ <insert id="insertLike" parameterType="map">
+
+	insert into
+	`like`
+	(
+	userId,
+	postId,
+	createdAt)
+	values(
+	#{userId},
+	#{postId},
+	now()
+	)
+ 
+ </insert>
+ 
+ 
+ <delete id="deleteLike" parameterType="map">
+	delete
+	from
+	`like`
+	where
+	userId= #{userId}
+	and
+	postId =#{postId}
+ 
+ 
+ </delete>
+ 
+ 
+ <delete id="deletePostLike" parameterType="int">
+	delete
+	from
+	`like`
+	where
+	postId =${postId}
+	
+ 
+ 
+ </delete>
  
  
  

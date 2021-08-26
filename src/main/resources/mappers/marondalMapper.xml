@@ -6,6 +6,7 @@
  <select id="selectUserById" parameterType="string" resultType="com.marondalgram.marondal.model.User">
 
 	select
+	id,
 	loginId,
 	password,
 	name,
@@ -22,6 +23,7 @@
   <select id="getUserById" parameterType="map" resultType="com.marondalgram.marondal.model.User">
 
 	select
+	id,
 	loginId,
 	password,
 	name,

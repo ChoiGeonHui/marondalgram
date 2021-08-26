@@ -11,12 +11,12 @@ public class Content {
 	//post 1개
 	private Post post;
 	
-	//post -좋아요 n개
-	private List<Like> likelist;
+	private Boolean fillLike;
 	
 	//post - 댓글 n개
 	private List<Comment> commentlist;
 	
+	//post -좋아요 n개
 	private int  likeCount;
 
 	public Post getPost() {
@@ -27,12 +27,15 @@ public class Content {
 		this.post = post;
 	}
 
-	public List<Like> getLikelist() {
-		return likelist;
+	
+
+
+	public Boolean getFillLike() {
+		return fillLike;
 	}
 
-	public void setLikelist(List<Like> likelist) {
-		this.likelist = likelist;
+	public void setFillLike(Boolean fillLike) {
+		this.fillLike = fillLike;
 	}
 
 	public List<Comment> getCommentlist() {

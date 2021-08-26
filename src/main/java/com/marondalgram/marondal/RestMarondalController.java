@@ -68,6 +68,7 @@ public class RestMarondalController {
 			session.setAttribute("userName",user.getName());
 			session.setAttribute("userloginId",user.getLoginId());
 			session.setAttribute("userId",user.getId());
+			
 		}else {
 			result.put("result", "fail");
 		}

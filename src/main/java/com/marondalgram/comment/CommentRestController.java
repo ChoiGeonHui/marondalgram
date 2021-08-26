@@ -44,5 +44,35 @@ public class CommentRestController {
 		
 		return result;
 	}
+	
+	@RequestMapping("/delete")
+	public Map<String, String> deleteComment(
+			@RequestParam("postId") int postId,
+			@RequestParam("content") String content,
+			HttpServletRequest request
+			){
+		
+		HttpSession session = request.getSession();
+		int userId =(int) session.getAttribute("userId");
+		String userName = (String) session.getAttribute("userName");
+		
+		
+		int row =commentBO.deleteComment(postId, userId, userName, content);
+		
+		Map<String , String> result = new HashMap<>();
+		
+		if(row >0) {
+			result.put("result", "success");
+		}else {
+			result.put("result", "fail");	
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
+	
 
 }

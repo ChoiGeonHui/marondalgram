@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.marondalgram.comment.bo.CommentBO;
 import com.marondalgram.comment.model.Comment;
 import com.marondalgram.like.bo.LikeBO;
-import com.marondalgram.like.model.Like;
 import com.marondalgram.post.model.Post;
 import com.marondalgram.timeline.dao.TimelineDAO;
 import com.marondalgram.timeline.domain.Content;
@@ -27,7 +26,7 @@ public class ContentBO {
 	LikeBO likeBO;
 	
 	
-	public List<Content> AllPostListView(){
+	public List<Content> AllPostListView(Integer userId){
 		
 		List<Content> contentList = new ArrayList<>();
 		List<Post> postlist = timelineDAO.selectListPostById();
@@ -39,8 +38,8 @@ public class ContentBO {
 			List<Comment> commentlist = commentBO.selectCommetList(post.getId());
 			content.setCommentlist(commentlist);
 			
-			List<Like> likelist = likeBO.selectLikeByPostId(post.getId());
-			content.setLikelist(likelist);
+			boolean postlike = likeBO.fillLikeByPostIdAndUserId(userId, post.getId());
+			content.setFillLike(postlike);
 			
 			content.setLikeCount(likeBO.likeConunt(post.getId()));
 			

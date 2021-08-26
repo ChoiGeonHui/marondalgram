@@ -9,13 +9,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
+import com.marondalgram.like.bo.LikeBO;
 import com.marondalgram.timeline.bo.ContentBO;
 import com.marondalgram.timeline.bo.TimelineBO;
 import com.marondalgram.timeline.domain.Content;
 
 @Controller
 public class TimelineController {
+	
+	@Autowired
+	LikeBO likeBO;
 	
 	
 	@Autowired
@@ -34,9 +37,8 @@ public class TimelineController {
 		HttpSession session = request.getSession();
 		userId =(Integer) session.getAttribute("userId");
 		userName = (String) session.getAttribute("userName");
-		//List<Post> list = timelineBO.getListPostById(userId);
-		List<Content> list = contentBO.AllPostListView();
-		
+		List<Content> list = contentBO.AllPostListView(userId);
+
 		
 		model.addAttribute("userId", userId);
 		model.addAttribute("UserName", userName);

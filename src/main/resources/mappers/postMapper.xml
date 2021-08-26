@@ -51,4 +51,16 @@
 </insert>
 
 
+<delete id="deletePost" parameterType="int">
+
+	delete
+	from
+	`post`
+	where
+	id = #{postId}
+
+
+</delete>
+
+
 </mapper>

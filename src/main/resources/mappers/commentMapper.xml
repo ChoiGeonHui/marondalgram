@@ -41,7 +41,37 @@
 	)
 
 	</insert>
+	
+	
+	<delete id="deleteComment" parameterType="map">
+	delete
+	from
+	comment
+	where
+	postId =#{postId}
+	
+	and
+	userId = #{userId}
+	
+	and
+	userName = #{userName}
+	
+	and
+	content = #{content}
+	
+	
+	
+	</delete>
 
+
+<delete id="deletePostComment" parameterType="int">
+	delete
+	from
+	comment
+	where
+	postId = ${postId}
+
+</delete>
 
 
 </mapper>

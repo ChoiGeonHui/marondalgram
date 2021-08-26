@@ -44,6 +44,11 @@ public class TimelineBO {
 		
 		timelineDAO.insertPost(userId, userName, content, imagePath);
 	}
+	
+	
+	public int deletePost(int postId) {
+		return timelineDAO.deletePost(postId);
+	}
 
 	
 }
