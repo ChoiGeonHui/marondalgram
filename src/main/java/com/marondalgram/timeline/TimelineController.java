@@ -17,12 +17,6 @@ import com.marondalgram.timeline.domain.Content;
 @Controller
 public class TimelineController {
 	
-	@Autowired
-	LikeBO likeBO;
-	
-	
-	@Autowired
-	TimelineBO timelineBO;
 	
 	@Autowired
 	ContentBO contentBO;

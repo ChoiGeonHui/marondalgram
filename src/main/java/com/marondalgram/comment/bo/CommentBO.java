@@ -31,7 +31,7 @@ public class CommentBO {
 	}
 	
 	
-	public int deletePostComment(int postId) {
-		return commentDAO.deletePostComment(postId);
+	public void deletePostComment(int postId) {
+		commentDAO.deletePostComment(postId);
 	}
 }

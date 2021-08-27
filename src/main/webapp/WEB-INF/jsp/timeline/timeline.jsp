@@ -25,14 +25,21 @@
 
 		<c:forEach var="content" items="${contentList}">
 			<div class="bg-secondary mt-2 d-flex justify-content-between">
-				<b class="text-white ml-2">${content.post.userName}</b> 
-				<a href="#" class="moreBtn" data-toggle="modal"	data-target="#moreSet"
-				data-post-name="${content.post.userName}" data-post-id="${content.post.id}"> 
-				<img height="25px" alt="더보기" src="/static/images/moreicon.jpg">
-				</a>
+				<b class="text-white ml-2">${content.post.userName}</b>
+
+				<c:if test="${content.post.userName eq userName}">
+					<a href="#" class="moreBtn" data-toggle="modal"
+						data-target="#moreSet" data-post-name="${content.post.userName}"
+						data-post-id="${content.post.id}" data-post-image="${content.post.imagePath }" > 
+						<img height="25px" alt="더보기" src="/static/images/moreicon.jpg">
+					</a>
+				</c:if>
+
+
 			</div>
 			<div class="mt-2 col-12">
 				<c:if test="${not empty content.post.imagePath}">
+					<b>${content.post.imagePath}</b>
 					<img class="col-12" alt="사진" src="${content.post.imagePath}">
 				</c:if>
 			</div>
@@ -192,14 +199,6 @@ $(document).ready(function(){
 				if(data.result=="success"){
 					alert("삭제 완료");
 					location.reload(); // 새로고침
-				}
-				
-				else if(data.result=="NotUserId"){
-					alert("먼저 로그인을 하세요");				
-				}
-				
-				else if(data.result=="UserIdDifferent"){	
-					alert("삭제하려는 게시물이 계정과 다릅니다");				
 				}else{
 					alert("오류발생");							
 				}

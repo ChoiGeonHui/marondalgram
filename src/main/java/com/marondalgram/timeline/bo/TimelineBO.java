@@ -23,6 +23,9 @@ public class TimelineBO {
 	@Autowired
 	FileManagerSurvice fileManagerSurvice;
 	
+	public Post getPost(int postId) {
+		return timelineDAO.selectPost(postId);
+	}
 	
 	
 	public List<Post> getListPostById(){
@@ -46,8 +49,8 @@ public class TimelineBO {
 	}
 	
 	
-	public int deletePost(int postId) {
-		return timelineDAO.deletePost(postId);
+	public void deletePost(int postId) {
+		timelineDAO.deletePost(postId);
 	}
 
 	

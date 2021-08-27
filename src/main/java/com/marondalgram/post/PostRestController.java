@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.marondalgram.comment.bo.CommentBO;
 import com.marondalgram.like.bo.LikeBO;
+import com.marondalgram.timeline.bo.ContentBO;
 import com.marondalgram.timeline.bo.TimelineBO;
 
 
@@ -31,6 +32,11 @@ public class PostRestController {
 	@Autowired
 	TimelineBO timelineBO;
 	
+	@Autowired
+	ContentBO contentBO;
+	
+	
+	//게시물 생성
 	@RequestMapping("/create")
 	public Map<String, String> createPost(
 			@RequestParam("content") String content,
@@ -57,6 +63,8 @@ public class PostRestController {
 	}
 	
 	
+	
+	//게시물 삭제
 	@RequestMapping("/delete")
 	public Map<String, String> deletePost(
 			@RequestParam("postId") int postId,
@@ -67,23 +75,15 @@ public class PostRestController {
 		Integer userId = null;
 		HttpSession session = request.getSession();
 		userId =(Integer) session.getAttribute("userId");
-		String userName = (String) session.getAttribute("userName");
-		
-		//System.out.println("###########postUserName = "+ postUserName);
 		
 		Map<String, String> result =new HashMap<String, String>();
 		
-		if(userId ==null) {
-			result.put("result", "NotUserId");
-			return result;
-		}else if(!userName.equals(postUserName)) {
-			//다른 계정에서 삭제하려는 경우
-			result.put("result", "UserIdDifferent");
+		if(userId == null) {
+			result.put("result", "fail");
 			return result;
 		}
-		int row = commentBO.deletePostComment(postId);
-		int row2 = likeBO.deletePostLike(postId);
-		int row3 = timelineBO.deletePost(postId);
+			
+		contentBO.AllDeletePostByPostId(postId);
 		
 		result.put("result", "success");
 		

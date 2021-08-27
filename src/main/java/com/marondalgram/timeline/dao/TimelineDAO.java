@@ -10,6 +10,7 @@ import com.marondalgram.post.model.Post;
 @Repository
 public interface TimelineDAO {
 	
+	public Post selectPost(int postId);
 	
 	public int insertPost(
 			@Param("userId") int userId,
@@ -18,7 +19,7 @@ public interface TimelineDAO {
 			@Param("imagePath")String imagePath);
 	
 	
-	public int deletePost(int postId);
+	public void deletePost(int postId);
 	
 	
 	

@@ -5,6 +5,25 @@
 
 <mapper namespace="com.marondalgram.timeline.dao.TimelineDAO">
 
+<select id="selectPost" parameterType="int"
+ resultType="com.marondalgram.post.model.Post" >
+
+	select
+	id,
+	userId,
+	userName,
+	content,
+	imagePath,
+	createdAt,
+	updatedAt
+	from
+	post
+	where `id` =#{postId}
+
+
+</select>
+
+
 
 <select id="selectListPostById"
  resultType="com.marondalgram.post.model.Post" >
