@@ -3,7 +3,6 @@ package com.marondalgram.timeline.domain;
 import java.util.List;
 
 import com.marondalgram.comment.model.Comment;
-import com.marondalgram.like.model.Like;
 import com.marondalgram.post.model.Post;
 
 public class Content {
