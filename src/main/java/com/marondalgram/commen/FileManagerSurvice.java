@@ -18,7 +18,7 @@ private Logger logger = LoggerFactory.getLogger(FileManagerSurvice.class);
 	
 	//실제 이미지가 (컴퓨터에) 저장될 경로
 	public final static String 	FILE_UPLOAD_PATH=
-			"G:\\workspace\\6.project\\quiz\\marondalgram\\Marondalgram\\src\\main\\resources\\static\\images/";
+			"D:\\images/";
 	// 이미지 저장 -> uri path 리턴
 	public String saveFile(String userLoginId, MultipartFile file) throws IOException {
 		//파일을 컴퓨터에 저장
